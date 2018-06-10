@@ -1,0 +1,31 @@
+1. Input:
+When searching for selenium encoded patterns in full mass spectra, SESTAR takes .ms1 files as input, which can be easily obtained from raw LC-MS/MS files by variouty of tools like RAW Xtractor.
+When searching for selenium encoded patterns in MS/MS spectra, SESTAR takes .ms2 files as input, which you can obtained through the same way.
+
+2. Analysis workflow:
+
+A. Selenium encoded envelope extraction
+
+First convert MS1 spctra in .ms1 format to csv format for R to read.
+Command: python Read_ms1.py <input_file> <output_file>
+The input_file is your .ms1 file and the output_file should be ended with ".csv" and named by users. 
+
+Then run the main program to extract selenium coded envelopes.
+Command: R --vanilla --args <option 1> <option 2> < SESTAR.r 
+The option 1 is the element for pattern search, you can choose "Se" or "Se_Pair". The latter one is designed for quantification experiments.
+The optino 2 is your ms1 file in .csv format.
+
+B. Selenium encoded MS/MS epectra extraction
+
+Command: R --vanilla --args < extract_Se_ms2.r
+The command should be run in the same folder where your .ms2 file is located.
+
+3. Output:
+The SESTAR.r returns two output files. One is ended with "valid.csv", which is the results above the score line. The other is the SESTAR's rating for all extracted envelopes.
+extract_Se_ms2.r returns a enriched ms2 file for selenium coded MS/MS spectra.
+
+4. Other parameters:
+The two score cutoffs can be set in the "SESTAR.r" file, the variable "r2.cutoff" corresponds to Ss and the variable "ratio.Se.normal.cutoff" corresponds to "SD". The default value for them are 10 and 1/6, respectively.
+
+5. Contact:
+For feedback, questions and comments, contact us at chuwang@pku.edu.cn.
