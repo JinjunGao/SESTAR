@@ -185,31 +185,6 @@ envelope.rating <- function(envelop.mz, envelop.charge, envelop.intensity) {
 		}
 	envelop.mass <- max(envelop.mz) * envelop.charge
 	max.index <- which.max(envelop.intensity)
-	if (e=="Br") {
-		elements.count <- averagine.count(envelop.mass)
-		elements.count_Br <- averagine.count(envelop.mass-78.918336*2)
-		Br.prob <- c(0.5069,0.0000,0.4931)
-		normal.prob <- isotope.dist(elements.count)[1:15]
-		withBr1.prob <- round(convolve(isotope.dist(elements.count_Br), rev(Br.prob),type="o"),4)[1:15]
-		withBr.prob <- round(convolve(withBr1.prob, rev(Br.prob),type="o"),4)[1:15]
-		envelop.length.diff <- 15 - length(envelop.intensity) ## length diffence between experimental got envelop and simulated one
-		Br.R2 <- normal.R2 <- rep(0,envelop.length.diff+1)
-		for (i in 1:(envelop.length.diff+1))  {
-			experimentint <- envelop.intensity
-			simulatedint.Br <- withBr.prob[i:(length(envelop.intensity)-1+i)]
-			simulatedint.Br[which(envelop.intensity == 0)] <- 0
-			Br.R2[i] <- acos(sum(experimentint*simulatedint.Br) / (sqrt(sum(experimentint*experimentint))*sqrt(sum(simulatedint.Br*simulatedint.Br))))/pi*180
-			simulatedint.normal <- normal.prob[i:(length(envelop.intensity)-1+i)]
-			simulatedint.normal[which(envelop.intensity == 0)] <- 0
-			normal.R2[i] <- acos(sum(experimentint*simulatedint.normal) / (sqrt(sum(experimentint*experimentint))*sqrt(sum(simulatedint.normal*simulatedint.normal))))/pi*180
-		}
-		R2.Br.index <- which.min(Br.R2)
-		R2.Br <- Br.R2[R2.Br.index]
-		R2.normal.index <- which.min(normal.R2)
-		R2.normal <- normal.R2[R2.normal.index]
-		ratio.Br.normal <- R2.normal/R2.Br
-		results <- list(R2.Br,ratio.Br.normal,withBr.prob,normal.prob,max.index)
-	}
 	if (e=="Se") {
 		elements.count <- averagine.count(envelop.mass)
 		elements.count_Se <- averagine.count(envelop.mass-79.9165)
@@ -1070,31 +1045,6 @@ envelope.rating.ms2 <- function(envelop.mz, envelop.charge, envelop.intensity) {
 		}
 	envelop.mass <- max(envelop.mz) * envelop.charge
 	max.index <- which.max(envelop.intensity)
-	if (e=="Br") {
-		elements.count <- averagine.count(envelop.mass)
-		elements.count_Br <- averagine.count(envelop.mass-78.918336*2)
-		Br.prob <- c(0.5069,0.0000,0.4931)
-		normal.prob <- isotope.dist(elements.count)[1:15]
-		withBr1.prob <- round(convolve(isotope.dist(elements.count_Br), rev(Br.prob),type="o"),4)[1:15]
-		withBr.prob <- round(convolve(withBr1.prob, rev(Br.prob),type="o"),4)[1:15]
-		envelop.length.diff <- 15 - length(envelop.intensity) ## length diffence between experimental got envelop and simulated one
-		Br.R2 <- normal.R2 <- rep(0,envelop.length.diff+1)
-		for (i in 1:(envelop.length.diff+1))  {
-			experimentint <- envelop.intensity
-			simulatedint.Br <- withBr.prob[i:(length(envelop.intensity)-1+i)]
-			simulatedint.Br[which(envelop.intensity == 0)] <- 0
-			Br.R2[i] <- acos(sum(experimentint*simulatedint.Br) / (sqrt(sum(experimentint*experimentint))*sqrt(sum(simulatedint.Br*simulatedint.Br))))/pi*180
-			simulatedint.normal <- normal.prob[i:(length(envelop.intensity)-1+i)]
-			simulatedint.normal[which(envelop.intensity == 0)] <- 0
-			normal.R2[i] <- acos(sum(experimentint*simulatedint.normal) / (sqrt(sum(experimentint*experimentint))*sqrt(sum(simulatedint.normal*simulatedint.normal))))/pi*180
-		}
-		R2.Br.index <- which.min(Br.R2)
-		R2.Br <- Br.R2[R2.Br.index]
-		R2.normal.index <- which.min(normal.R2)
-		R2.normal <- normal.R2[R2.normal.index]
-		ratio.Br.normal <- R2.normal/R2.Br
-		results <- list(R2.Br,ratio.Br.normal,withBr.prob,normal.prob,max.index)
-	}
 	if (e=="Se") {
 		elements.count <- averagine.count(envelop.mass)
 		elements.count_Se <- averagine.count(envelop.mass-79.9165)
