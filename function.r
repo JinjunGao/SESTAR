@@ -208,7 +208,7 @@ envelope.rating <- function(envelop.mz, envelop.charge, envelop.intensity) {
 		R2.Se <- Se.R2[R2.Se.index]
 		R2.normal.index <- which.min(normal.R2)
 		R2.normal <- normal.R2[R2.normal.index]
-		ratio.Se.normal <- R2.normal/R2.Se
+		ratio.Se.normal <- R2.Se/R2.normal
 		results <- list(round(R2.Se,2),round(ratio.Se.normal,2),withSe.prob,normal.prob,max.index,envelop_length, R2.Se.index,R2.normal.index)
 	}
 	if (e == "Se74") {
@@ -228,7 +228,7 @@ envelope.rating <- function(envelop.mz, envelop.charge, envelop.intensity) {
 			simulatedint.normal <- normal.prob[3:envelop_length]
 			simulatedint.normal[which(envelop.intensity == 0)] <- 0
 			R2.normal <- acos(sum(experimentint*simulatedint.normal) / (sqrt(sum(experimentint*experimentint))*sqrt(sum(simulatedint.normal*simulatedint.normal))))/pi*180
-			ratio.Se.normal <- R2.normal/R2.Se
+			ratio.Se.normal <- R2.Se/R2.normal
 			results <- list(round(R2.Se,2),round(ratio.Se.normal,2),withSe.prob,normal.prob,max.index,envelop_length,1,1)
 		}
 	}
@@ -283,7 +283,7 @@ envelope.rating.HL <- function(envelop.mz, envelop.charge, envelop.intensity) {
 			R2.Se <- Se.R2[R2.Se.index]
 			R2.normal.index <- which.min(normal.R2)
 			R2.normal <- normal.R2[R2.normal.index]
-			ratio.Se.normal <- R2.normal/R2.Se
+			ratio.Se.normal <- R2.Se/R2.normal
 			results <- list(round(R2.Se,2),round(ratio.Se.normal,2),withSe.prob,normal.prob,max.index,envelop_length, R2.Se.index,R2.normal.index,index_light)
 		} else {
 			results <- list(0,0,0,0,0,0,0,0,0)
@@ -330,7 +330,7 @@ peak_extraction_judgement_HL <- function(ms1) {
 						results <- envelope.rating.HL(envelop.mz,charge,envelop.intensity)
 						#print(results)
 						#if (results == "F") break
-						if (results[[1]] < r2.cutoff & results[[2]] > ratio.Se.normal.cutoff ) {
+						if (results[[1]] < r2.cutoff & results[[2]] < ratio.Se.normal.cutoff ) {
 							mz_mono <- envelop.mz[results[[9]]]
 							mass_mono <- envelop.mass[results[[9]]] - i *Hplus
 							print("Fuck")
@@ -427,7 +427,7 @@ peak_extraction_judgement <- function(ms1) {
 						results <- envelope.rating(envelop.mz,charge,envelop.intensity)
 						#print(results)
 						#if (results == "F") break
-						if (results[[1]] < r2.cutoff & results[[2]] > ratio.Se.normal.cutoff & results[[5]] > 3 & results[[6]] > 5 & (results[[6]]-results[[5]]) >1 ) {
+						if (results[[1]] < r2.cutoff & results[[2]] < ratio.Se.normal.cutoff & results[[5]] > 3 & results[[6]] > 5 & (results[[6]]-results[[5]]) >1 ) {
 							print("Fuck")
 							#a <- "T"
 							envelop.temp <- list(run,rt,envelop.temp.mz,charge,envelop.temp.mass,envelop.temp.intensity, mass_mono,mz_mono, results[[1]], results[[2]],results[[5]],results[[6]])
@@ -1067,7 +1067,7 @@ envelope.rating.ms2 <- function(envelop.mz, envelop.charge, envelop.intensity) {
 		R2.Se <- Se.R2[R2.Se.index]
 		R2.normal.index <- which.min(normal.R2)
 		R2.normal <- normal.R2[R2.normal.index]
-		ratio.Se.normal <- R2.normal/R2.Se
+		ratio.Se.normal <- R2.Se/R2.normal
 		results <- list(R2.Se,ratio.Se.normal,withSe.prob,normal.prob,max.index)
 	}
 	return(results)
