@@ -333,8 +333,6 @@ peak_extraction_judgement_HL <- function(ms1) {
 						if (results[[1]] < r2.cutoff & results[[2]] < ratio.Se.normal.cutoff ) {
 							mz_mono <- envelop.mz[results[[9]]]
 							mass_mono <- envelop.mass[results[[9]]] - i *Hplus
-							print("Fuck")
-							#a <- "T"
 							envelop.temp <- list(run,rt,envelop.temp.mz,charge,envelop.temp.mass,envelop.temp.intensity, mass_mono,mz_mono, results[[1]], results[[2]],results[[9]],results[[6]])
 							envelop <- rbind(envelop,envelop.temp)
 							out.picturename <- paste(results[[9]],results[[6]],mass_mono,mz_mono,rt,charge,results[[1]],results[[2]],".png",sep = "_")
@@ -428,7 +426,6 @@ peak_extraction_judgement <- function(ms1) {
 						#print(results)
 						#if (results == "F") break
 						if (results[[1]] < r2.cutoff & results[[2]] < ratio.Se.normal.cutoff & results[[5]] > 3 & results[[6]] > 5 & (results[[6]]-results[[5]]) >1 ) {
-							print("Fuck")
 							#a <- "T"
 							envelop.temp <- list(run,rt,envelop.temp.mz,charge,envelop.temp.mass,envelop.temp.intensity, mass_mono,mz_mono, results[[1]], results[[2]],results[[5]],results[[6]])
 							envelop <- rbind(envelop,envelop.temp)
@@ -588,7 +585,6 @@ pair_finder <- function (ms1) {
 					if (length(pos) >1) {
 						pos <- pos[1]
 					}
-					#if (length(pos) >1) print("fuck"); break
 					charge <- z
 					mz_L <- mz.this.rt[1]
 					#if (mz_L == a) break
@@ -928,7 +924,6 @@ read.ms2.all <- function(ms2file) {
 		} 
 		line=readLines(ms2file,n=1)
 		if (length(line) == 0) {
-			print("fuck")
 			#break
 			ms2list@name[[length(ms2list@name)+1]] <- spectrum_name
 			ms2list@rt[[length(ms2list@rt)+1]] <- spectrum_rt
