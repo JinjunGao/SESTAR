@@ -1,12 +1,13 @@
 args <- commandArgs(trailingOnly=T)
-source("function.r")
+SESTAR_PATH <- Sys.getenv("SESTAR_PATH")
+source(paste(SESTAR_PATH,"/function.r",sep=""))
 
 e <- args[1]
 print(e)
 name <- args[2]
 
 r2.cutoff <- 10
-ratio.Se.normal.cutoff <- 6
+ratio.Se.normal.cutoff <- 1/6
 rt.cut <- 10.0
 isotope.mass.unit <- 1.0033548
 mz.ppm.cut <- 0.00001 #10ppm
