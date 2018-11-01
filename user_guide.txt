@@ -1,35 +1,39 @@
-1. Define an environment variable CIMAGE_PATH pointing to the “your_folder” ( export CIMAGE_PATH=your_folder or setenv CIMAGE_PATH your_folder)
+1. Define an environment variable SESTAR_PATH pointing to the “your_folder” ( export SESTAR_PATH=your_folder or setenv SESTAR_PATH your_folder)
 
 2. Input:
-When searching for selenium encoded patterns in full mass spectra, SESTAR takes .ms1 files as input, which can be easily obtained from raw LC-MS/MS files by variouty of tools like RAW Xtractor.
+When searching for selenium encoded patterns in full mass spectra, SESTAR takes .ms1 files as input, which can be easily converted from raw LC-MS/MS files by variouty of tools like RAW Xtractor.
 When searching for selenium encoded patterns in MS/MS spectra, SESTAR takes .ms2 files as input, which you can obtained through the same way.
 
 3. Analysis workflow:
 
 A. Selenium encoded envelope extraction
 
-First convert MS1 spctra in .ms1 format to csv format for R to read.
+First convert MS1 spctra in ms1 format to csv format for R to read.
 Command: python Read_ms1.py <input_file> <output_file>
-The input_file is your .ms1 file and the output_file should be ended with ".csv" and named by users. 
+The input_file is your ms1 file and the output_file should be ended with ".csv" and named by users. 
 
 Then run the main program to extract selenium coded envelopes.
 Command: R --vanilla --args <option 1> <option 2> < SESTAR.r > SESTAR.rout &
 The option 1 is the element for pattern search, the currently available element is "Se". 
-The optino 2 is your ms1 file in .csv format.
+The optino 2 is your ms1 file in csv format.
 
 B. Selenium encoded MS/MS epectra extraction
 
 Command: R --vanilla --args <option 1> <option 2> < extract_Se_ms2.r > Se_ms2.rout &
 The option 1 is the element for pattern search, the currently available element is "Se". 
 The optino 2 is your ms2 file in .ms2 format.
-The command should be run in the same folder where your .ms2 file is located.
+The command should be run in the same folder where your ms2 file is located.
 
 4. Output:
-The SESTAR.r returns two output files. One is ended with "valid.csv", which is the results above the score line. The other is the SESTAR's rating for all extracted envelopes.
+
+The SESTAR.r returns two output files. One is ended with "valid.csv", which is the integrated result file containing detections with more than two matched ms1 spectra. The other is all the envelopes detected with a selenium pattern.
+
 extract_Se_ms2.r returns a enriched ms2 file for selenium coded MS/MS spectra.
 
 5. Other parameters:
+
 The two score cutoffs can be set in the "SESTAR.r" file, the variable "r2.cutoff" corresponds to Ss and the variable "ratio.Se.normal.cutoff" corresponds to "SD". The default value for them are 10 and 1/6, respectively.
 
 6. Contact:
+
 For feedback, questions and comments, contact us at chuwang@pku.edu.cn.
