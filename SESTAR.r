@@ -31,7 +31,7 @@ if (e == "Se_Pair") {
 	out_matrix <- get_common_mass_single_run(envelop)
 	out_matrix <- out_matrix[-1,]
 }
-colnames(envelope)[c(9,10)] <- c("Score1","Score2")
+colnames(envelop)[c(9,10)] <- c("Score1","Score2")
 cat("write csv file")
 write.csv(envelop,paste(run,"envelop.csv",sep="_"))
 write.csv(out_matrix,paste(run,"envelop_valid.csv",sep="_"))
