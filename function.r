@@ -479,8 +479,8 @@ peak_extraction_judgement <- function(ms1) {
 }
 
 get_common_mass_single_run <- function(envelop) {
-	out_matrix <- data.frame(run=numeric(1),count=numeric(1),rt=numeric(1),rt_mean=numeric(1),rt_variance=numeric(1),mass=numeric(1),mass_mean=numeric(1),mass_variance=numeric(1),R2=numeric(1),
-				R2_mean=numeric(1),R2_variance=numeric(1),RR2 = numeric(1),RR2_mean=numeric(1),RR2_variance=numeric(1),charge=numeric(1),charge_max=numeric(1),mz=numeric(1),envelope_length=numeric(1),max_index=numeric(1))
+	out_matrix <- data.frame(run=numeric(1),count=numeric(1),rt=numeric(1),rt_mean=numeric(1),rt_variance=numeric(1),mass=numeric(1),mass_mean=numeric(1),mass_variance=numeric(1),Score1=numeric(1),
+				Score1_mean=numeric(1),Score1_variance=numeric(1),Score2 = numeric(1),Score2_mean=numeric(1),Score2_variance=numeric(1),charge=numeric(1),charge_max=numeric(1),mz=numeric(1),envelope_length=numeric(1),max_index=numeric(1))
 	z_candidate <- envelop[,'charge']
 	rt_candidate <- envelop[,'rt']
 	mass_candidate <- envelop[,'mass_mono']
