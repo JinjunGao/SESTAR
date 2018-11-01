@@ -1,5 +1,6 @@
 args <- commandArgs(trailingOnly=T)
-source("function.r")
+SESTAR_PATH <- Sys.getenv("SESTAR_PATH")
+source(paste(SESTAR_PATH,"/function.r",sep=""))
 
 e <- args[1]
 ms2file <- args[2]
