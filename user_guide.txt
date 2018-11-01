@@ -11,7 +11,7 @@ Command: python Read_ms1.py <input_file> <output_file>
 The input_file is your .ms1 file and the output_file should be ended with ".csv" and named by users. 
 
 Then run the main program to extract selenium coded envelopes.
-Command: R --vanilla --args <option 1> <option 2> < SESTAR.r 
+Command: R --vanilla --args <option 1> <option 2> < SESTAR.r > SESTAR.rout &
 The option 1 is the element for pattern search, you can choose "Se" or "Se_Pair". The latter one is designed for quantification experiments.
 The optino 2 is your ms1 file in .csv format.
 
